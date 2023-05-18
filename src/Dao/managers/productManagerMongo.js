@@ -57,8 +57,6 @@ class ProductManagerMongo {
   async updateProduct(pid, _product) {
     const products = await productModel.findOne({ _id: pid });
 
-    //const prodIndex = products.find((product) => product._id == pid);
-
     products.title = _product.title;
     products.description = _product.description;
     products.price = _product.price;

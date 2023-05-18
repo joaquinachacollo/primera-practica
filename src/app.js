@@ -25,9 +25,8 @@ app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", messagesRouter);
 app.use("/api/carts", cartsRouter);
-app.use("/api/products", productsRouter);
+app.use("/", productsRouter);
 
 const server = app.listen(PORT, () => {
   console.log("servidor funcionando en el puerto: " + PORT);
