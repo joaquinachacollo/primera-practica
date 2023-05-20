@@ -29,29 +29,17 @@ class ProductManagerMongo {
   async getProducts() {
     const products = await productModel.find();
 
-    return {
-      code: 202,
-      status: "Success",
-      message: products,
-    };
+    return products;
   }
 
   async getProductByID(pid) {
     const product = await productModel.findOne({ _id: pid });
 
     if (!product) {
-      return {
-        code: 400,
-        status: "Error",
-        message: "No se ha encontrado un product con ese ID",
-      };
+      return "No se ha encontrado un product con ese ID";
     }
 
-    return {
-      code: 202,
-      status: "Success",
-      message: product,
-    };
+    return product;
   }
 
   async updateProduct(pid, _product) {
@@ -65,29 +53,17 @@ class ProductManagerMongo {
 
     await productModel.updateMany({ _id: pid }, { $set: products });
 
-    return {
-      code: 202,
-      status: "Success",
-      message: `El producto con ID ${pid} ha sido actualizado exitosamente`,
-    };
+    return `El producto con ID ${pid} ha sido actualizado exitosamente`;
   }
 
   async deleteProduct(pid) {
     const product = await productModel.deleteOne({ _id: pid });
 
     if (!product) {
-      return {
-        code: 400,
-        status: "Error",
-        message: "No se ha encontrado un product con ese ID",
-      };
+      return "No se ha encontrado un product con ese ID";
     }
 
-    return {
-      code: 202,
-      status: "Success",
-      message: product,
-    };
+    return product;
   }
 }
 

@@ -8,13 +8,10 @@ const productManagerMongo = new ProductManagerMongo();
 router.get("/", async (req, res) => {
   const result = await productManagerMongo.getProducts();
 
-  res.status(result.code).send({
-    status: result.status,
-    message: result.message,
-  });
+  res.send(result);
 });
 
-router.get("/products", async (req, res) => {
+router.get("/", async (req, res) => {
   const { limit, page, sort, qry } = req.query;
 
   const { docs, hasPrevPage, hasNextPage, nextPage, prevPage } =
@@ -36,16 +33,13 @@ router.get("/products", async (req, res) => {
   });
 });
 
-/*router.get("/:pid", async (req, res) => {
+router.get("/:pid", async (req, res) => {
   const pid = req.params.pid;
 
   const result = await productManagerMongo.getProductByID(pid);
 
-  res.status(result.code).send({
-    status: result.status,
-    message: result.message,
-  });
-});*/
+  res.send(result);
+});
 
 router.post("/", async (req, res) => {
   const product = req.body;
@@ -63,20 +57,14 @@ router.put("/:pid", async (req, res) => {
   const product = req.body;
   const result = await productManagerMongo.updateProduct(id, product);
 
-  res.status(result.code).send({
-    status: result.status,
-    message: result.message,
-  });
+  res.status(result);
 });
 
 router.delete("/:pid", async (req, res) => {
   const id = req.params.pid;
 
   const result = await productManagerMongo.deleteProduct(id);
-  res.status(result.code).send({
-    status: result.status,
-    message: result.message,
-  });
+  res.send(result);
 });
 
 export default router;

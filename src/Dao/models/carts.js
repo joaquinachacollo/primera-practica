@@ -1,10 +1,18 @@
 import mongoose from "mongoose";
 
-const cartCollection = "carts";
+const cartCollection = "carrito";
 
 const cartSchema = mongoose.Schema({
-  products: {
-    type: Array,
+  productos: {
+    type: [
+      {
+        producto: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "productos",
+        },
+        quantity: Number,
+      },
+    ],
     default: [],
   },
 });

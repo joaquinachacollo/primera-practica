@@ -7,10 +7,7 @@ const cartManagerMongo = new CartManagerMongo();
 router.get("/", async (req, res) => {
   const respuesta = await cartManagerMongo.getCarts();
 
-  res.status(respuesta.code).send({
-    status: respuesta.status,
-    message: respuesta.message,
-  });
+  res.send(respuesta);
 });
 
 router.get("/:cid", async (req, res) => {
@@ -18,41 +15,56 @@ router.get("/:cid", async (req, res) => {
 
   const respuesta = await cartManagerMongo.getCart(cid);
 
-  res.status(respuesta.code).send({
-    status: respuesta.status,
-    message: respuesta.message,
-  });
+  res.send(respuesta);
 });
 
 router.post("/", async (req, res) => {
   const respuesta = await cartManagerMongo.createCart();
-  res.status(respuesta.code).send({
-    status: respuesta.status,
-    message: respuesta.message,
-  });
+  res.send(respuesta);
 });
 
 router.post("/:cid/product/:pid", async (req, res) => {
   const cid = req.params.cid;
   const pid = req.params.pid;
 
-  const respuesta = await cartManagerMongo.updateCart(cid, pid);
+  const respuesta = await cartManagerMongo.updateProductCart(cid, pid);
 
-  res.status(respuesta.code).send({
-    status: respuesta.status,
-    message: respuesta.message,
-  });
+  res.send(respuesta);
 });
 
 router.delete("/:cid", async (req, res) => {
   const cid = req.params.cid;
 
-  const respuesta = await cartManagerMongo.deleteCart(cid);
+  const respuesta = await cartManagerMongo.deleteCartProducts(cid);
 
-  res.status(respuesta.code).send({
-    status: respuesta.status,
-    message: respuesta.message,
-  });
+  res.send(respuesta);
+});
+
+router.delete("/:cid/product/:pid", async (req, res) => {
+  const cid = req.params.cid;
+  const pid = req.params.pid;
+
+  const respuesta = await cartManagerMongo.deleteCartProduct(cid, pid);
+
+  res.send(respuesta);
+});
+
+router.put("/:cid", async (req, res) => {
+  const cid = req.params.cid;
+  const product = req.body;
+
+  const respuesta = await cartManagerMongo.updateCartProduct(cid, product);
+
+  res.send(respuesta);
+});
+
+router.put("/:cid/product/:pid", async (req, res) => {
+  const cid = req.params.cid;
+  const pid = req.params.pid;
+
+  const respuesta = await cartManagerMongo.deleteCartProducts(cid, pid);
+
+  res.send(respuesta);
 });
 
 export default router;

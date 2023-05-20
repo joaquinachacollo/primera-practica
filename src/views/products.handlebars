@@ -6,16 +6,17 @@
     <p>stock: {{this.stock}}</p>
     <p>category: {{this.category}}</p>
     <br />
+    <button>Agregar al carrrito</button>
   {{/each}}
   {{#if hasPrevPage}}
     <a
-      href="/products?limit={{limit}}&page={{prevPage}}&sort={{sort}}&qry={{qry}}"
+      href="/api/products?limit={{limit}}&page={{prevPage}}&sort={{sort}}&qry={{qry}}"
     ><button>Anterior</button></a>
   {{/if}}
 
   {{#if hasNextPage}}
     <a
-      href="/products?limit={{limit}}&page={{nextPage}}&sort={{sort}}&qry={{qry}}"
+      href="/api/products?limit={{limit}}&page={{nextPage}}&sort={{sort}}&qry={{qry}}"
     ><button>Siguiente</button></a>
   {{/if}}
 </div>
